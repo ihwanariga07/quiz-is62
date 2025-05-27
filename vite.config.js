@@ -1,18 +1,18 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import laravel from 'vite-plugin-laravel';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './resources/js'),
-    },
-  },
-  server: {
-    proxy: {
-      '/app': 'http://localhost',
-    },
+  plugins: [
+    laravel({
+      input: [
+        'resources/sass/app.scss',
+        'resources/js/app.js',
+      ],
+      refresh: true,
+    }),
+  ],
+  build: {
+    manifest: true,
+    outDir: 'public/build',
   },
 });
